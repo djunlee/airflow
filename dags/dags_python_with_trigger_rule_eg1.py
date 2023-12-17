@@ -1,6 +1,5 @@
 from airflow import DAG
 from airflow.decorators import task
-from airflow.operators.python import PythonOperator
 from airflow.operators.bash import BashOperator
 from airflow.exceptions import AirflowException
 
@@ -10,7 +9,7 @@ with DAG(
     dag_id='dags_python_with_trigger_rule_eg1',
     start_date=pendulum.datetime(2023,12,10, tz='Asia/Seoul'),
     schedule=None,
-    catchup=True
+    catchup=False
 ) as dag:
     bash_upstream_1 = BashOperator(
         task_id='bash_upstream_1',
@@ -29,4 +28,4 @@ with DAG(
     def python_downstream_1():
         print('정상 처리')
 
-    [bash_upstream_1, python_upstream_1, python_upstream_2] >> python_downstream_1
+    [bash_upstream_1, python_upstream_1(), python_upstream_2()] >> python_downstream_1()
