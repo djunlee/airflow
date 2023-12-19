@@ -27,6 +27,4 @@ with DAG(
         failed_status=None
     )
 
-
-
     start_task >> trigger_dag_task
