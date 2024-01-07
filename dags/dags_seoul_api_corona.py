@@ -4,7 +4,7 @@ import pendulum
 
 with DAG(
     dag_id='dags_seoul_api_corona',
-    schedule='0 0 * * *',
+    schedule='0 7 * * *',
     start_date=pendulum.datetime(2023,12,24, tz='Asia/Seoul'),
     catchup=False
 ) as dag:
